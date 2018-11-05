@@ -73,6 +73,7 @@ func New(cfg Config, ms shuttletracker.ModelService, msg shuttletracker.MessageS
 		r.Get("/", api.UpdatesHandler)
 	})
 
+<<<<<<< HEAD
 	// Admin message
 	r.Route("/adminMessage", func(r chi.Router) {
 		r.Get("/", api.AdminMessageHandler)
@@ -81,6 +82,16 @@ func New(cfg Config, ms shuttletracker.ModelService, msg shuttletracker.MessageS
 			r.Post("/", api.SetAdminMessage)
 		})
 	})
+=======
+	// Public
+	r.HandleFunc("/vehicles", api.VehiclesHandler).Methods("GET")
+	r.HandleFunc("/updates", api.UpdatesHandler).Methods("GET")
+	r.HandleFunc("/adminMessage", api.AdminMessageHandler).Methods("GET")
+	r.HandleFunc("/updates/message", api.UpdateMessageHandler).Methods("GET")
+	r.HandleFunc("/routes", api.RoutesHandler).Methods("GET")
+	r.HandleFunc("/stops", api.StopsHandler).Methods("GET")
+	r.HandleFunc("/notifications", api.NotificationsCreateHandler).Methods("GET")
+>>>>>>> 0e75926a14d98e1d9cc2bc82ea186e46da309c70
 
 	// Routes
 	r.Route("/routes", func(r chi.Router) {
