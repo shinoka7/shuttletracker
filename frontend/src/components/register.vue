@@ -24,6 +24,25 @@
                 <input type="text" id="carrier"
                 name="carrier" required /> 
         </div>
+        <div>
+            <label for="schedule">When to be Notified: </label>
+            <select name="days">
+                <option value="mon">Monday</option>
+                <option value="tues">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thurs">Thursday</option>
+                <option value="fri">Friday</option>
+            </select>
+            <script>
+                var time = {};
+                for (i=7;i<23;i++) {
+                    time[i] = [];
+                    for(j=15;i<60;j++) {
+                        time[i].push(j); 
+                    }
+                }
+            </script>
+        </div>
     </div>
     <div>
         <input type="submit" class="submit" value="Submit" />
