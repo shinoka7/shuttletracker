@@ -26,21 +26,32 @@
         </div>
         <div>
             <label for="schedule">When to be Notified: </label>
-            <select name="days">
+            <select name="days" id='days'>
                 <option value="mon">Monday</option>
                 <option value="tues">Tuesday</option>
                 <option value="wed">Wednesday</option>
                 <option value="thurs">Thursday</option>
                 <option value="fri">Friday</option>
             </select>
+            <select name="hours" id='hours'>
+                <option value="eight">8</option>
+                //times
+            </select> : 
+            <select name="minutes" id='minutes'>
+            </select>
             <script>
-                var time = {};
-                for (i=7;i<23;i++) {
-                    time[i] = [];
-                    for(j=15;i<60;j++) {
-                        time[i].push(j); 
-                    }
+            $(document).ready(function() {
+                var hlist = document.getElementById('hours');
+                var mlist = document.getElementById('minutes');
+                var start_time = 7;
+                var end_time = 23;
+                for(i=start_time,j=0;i<end_time;i++,j++) {
+                    hlist.options[j] = new Option(i,i);
                 }
+                for(i=0,j=0;i<60;i=i+15,j++) {
+                    mlist.options[j] = new Option(i,i);
+                }
+            });
             </script>
         </div>
     </div>
