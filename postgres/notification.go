@@ -51,3 +51,16 @@ func (ns *NotificationService) DeleteNotification(phone_num string) (int, error)
 	}
 	return int(n), nil
 }
+
+func (ns *NotificationService) VerifyNotification(phone_num string) (int, error) {
+	statement := "UPDATE notifications SET verified = TRUE WHERE phone_num == $1;"
+	res, err := ns.db.Exec(statement, phone_num)
+	if err != nil {
+		return 0, err
+	}
+	n, err := res.RowsAffected()
+	if err != nil {
+		return 0, err
+	}
+	return int(n), nil
+}

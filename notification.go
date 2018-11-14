@@ -17,6 +17,7 @@ type Notification struct {
 type NotificationService interface {
 	CreateNotification(notification *Notification) error
 	DeleteNotification(phone_num string) (int, error)
+	VerifyNotification(phone_num string) (int, error)
 }
 
 var (
