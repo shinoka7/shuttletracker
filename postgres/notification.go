@@ -2,7 +2,6 @@ package postgres
 
 import (
 	"database/sql"
-
 	"github.com/wtg/shuttletracker"	
 )
 
@@ -12,7 +11,7 @@ type NotificationService struct {
 
 func (ns *NotificationService) initializeSchema(db *sql.DB) error {
 	ns.db = db
-	schema:= `
+	statement := `
 	CREATE TABLE IF NOT EXISTS notifications (
 		id serial PRIMARY KEY,
 		phone_num text NOT NULL,
@@ -22,12 +21,12 @@ func (ns *NotificationService) initializeSchema(db *sql.DB) error {
 		time timestamp with time zone NOT NULL,
 		route_id integer
 		);`
-		_, err := ns.db.Exec(schema)
+		_, err := ns.db.Exec(statement)
 		return err
 }
 
 func (ns *NotificationsService) CreateNotification(n *shuttletracker.Notification) {
-	query := `
+	statement := `
 	INSERT INTO notifications (
 		phone_num,
 		carrier,
@@ -36,7 +35,7 @@ func (ns *NotificationsService) CreateNotification(n *shuttletracker.Notificatio
 		time,
 		route_id
 	) VALUES ($1,$2,$3,$4,$5,$6);`
-	row := ns.db.QueryRow(query, n.PhoneNumber, n.Carrier, n.Verified, n.Stop, n.Time, n.RouteID)
+	row := ns.db.QueryRow(statement, n.PhoneNumber, n.Carrier, n.Verified, n.Stop, n.Time, n.RouteID)
 }
 
 func (ns *NotificationService) DeleteNotification(phone_num string) (int, error) {
