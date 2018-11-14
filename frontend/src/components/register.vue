@@ -8,7 +8,7 @@
             <select name="stops">
                 <option value="union">Union</option>
                 <option value="blitman">Blitman</option>
-                //and so on
+                //and so on need access to stops list json
             </select>
         </div>
         <div>
@@ -39,20 +39,6 @@
             </select> : 
             <select name="minutes" id='minutes'>
             </select>
-            <script>
-            $(document).ready(function() {
-                var hlist = document.getElementById('hours');
-                var mlist = document.getElementById('minutes');
-                var start_time = 7;
-                var end_time = 23;
-                for(i=start_time,j=0;i<end_time;i++,j++) {
-                    hlist.options[j] = new Option(i,i);
-                }
-                for(i=0,j=0;i<60;i=i+15,j++) {
-                    mlist.options[j] = new Option(i,i);
-                }
-            });
-            </script>
         </div>
     </div>
     <div>
@@ -66,7 +52,22 @@
 import Vue from 'vue';
 export default Vue.extend({
 
+
 });
+
+$(document).ready(function() {
+    var hlist = document.getElementById('hours');
+    var mlist = document.getElementById('minutes');
+    var start_time = 7;
+    var end_time = 23;
+    for(i=start_time,j=0;i<end_time;i++,j++) {
+        hlist.options[j] = new Option(i,i);
+    }
+    for(i=0,j=0;i<60;i=i+15,j++) {
+        mlist.options[j] = new Option(i,i);
+    }
+});
+
 </script>
 <style lang="scss">
     .container{
