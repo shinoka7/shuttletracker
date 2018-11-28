@@ -17,6 +17,7 @@ type Config struct {
 	API      *api.Config
 	Log      *log.Config
 	Postgres *postgres.Config
+	Notipost *notipost.Config
 }
 
 // New creates a new, global Config. Reads in configuration from config files.
@@ -33,6 +34,7 @@ func New() (*Config, error) {
 	cfg.Updater = updater.NewConfig(v)
 	cfg.Log = log.NewConfig()
 	cfg.Postgres = postgres.NewConfig(v)
+	cfg.Notipost = notipost.NewConfig(v)
 
 	log.Debugf("All settings: %+v", v.AllSettings())
 

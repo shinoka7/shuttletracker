@@ -11,6 +11,7 @@ import (
 	"github.com/wtg/shuttletracker/api"
 	"github.com/wtg/shuttletracker/config"
 	"github.com/wtg/shuttletracker/log"
+	"github.com/wtg/shuttletracker/notipost"
 	"github.com/wtg/shuttletracker/postgres"
 	"github.com/wtg/shuttletracker/updater"
 )
@@ -38,6 +39,15 @@ var rootCmd = &cobra.Command{
 			log.WithError(err).Error("unable to create Postgres")
 			return
 		}
+
+		np, err := notipost.New(*cfg.Notipost)
+		if err != nil {
+			log.WithError(err).Error("unable to create Notipost")
+			return
+		}
+
+		// Notification service
+		var ns shuttletracker.NotificationService = ng ///from here///
 
 		// Model service
 		var ms shuttletracker.ModelService = pg

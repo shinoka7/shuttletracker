@@ -14,7 +14,7 @@ func GetEmail(phone_number string, input_carrier string) (string) {
 		"AT&T": "txt.att.net",
 		"Sprint": "messaging.sprintpcs.com",
 		"T-Mobile": "tmomail.net",
-		"Verison": "vtext.com",
+		"Verizon": "vtext.com",
 
 		// TODO: add more potential carriers
 	}
