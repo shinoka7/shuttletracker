@@ -2,6 +2,7 @@ package updater
 
 import (		
 	"net/smtp"
+	"time"
 
 	"github.com/wtg/shuttletracker/log"
 	"github.com/wtg/shuttletracker/model"
@@ -31,14 +32,24 @@ func GetEmail(phone_number string, input_carrier string) (string) {
 
 }
 
-func CreateMessage(current_stop string, next_stop string) ([]byte){
-	
-	var message_body string = "The shuttle is at " + current_stop + ".\nThe next stop is " + next_stop + "."
-	
-	msg := []byte("RPI Shuttle Tracker Notification\r\n" +
-		message_body + "\r\n")
+//figure out the object to use for shuttle data storage
+func CreateMessage(shuttles []model.Vehicle, target_stop string) ([]byte) {
+	var message_body string = "The next shuttles that will arrive at " + target_stop + "are\n"
+
+	var eta []time.Time = runETA(shuttles, target_stop)
+
+	for i := range shuttles {
+		message_body += "Shuttle " + shuttles[i].VehicleName + " in " + eta[i].String() + "\n"
+	}
+
+	msg := []byte("RPI Shuttle Tracker Notification\r\n" + message_body + "\r\n")
 
 	return msg
+}
+
+//return ETA based on current vehicles and target stop
+func runETA(vehicles []model.Vehicle, target_stop string) ([]time.Time) {
+	return nil
 }
 
 func Send(notifications []model.Notification, current_stop string, next_stop string) (int){
