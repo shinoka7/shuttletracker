@@ -81,10 +81,16 @@ func (u *Updater) Run() {
 	// Do one initial update.
 	u.update()
 
+	// notifications
+	/* go func () {
+		for range time.Tick(10 * time.Minute){
+			send_notifications.Send()
+		}
+	}()*/
+
 	// Call update() every updateInterval.
 	for range ticker {
 		u.update()
-
 	}
 }
 

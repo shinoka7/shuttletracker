@@ -47,7 +47,7 @@ func (api *API) SetAdminMessage(w http.ResponseWriter, r *http.Request) {
 		// ? -- based on frontend implementation?
 
 		// // Create new notification
-		// notification := model.Notifiction {
+		// notification := model.Notification {
 		// 	RouteID:		,
 		// 	StopID:			,
 		// 	PhoneNumber:	,
