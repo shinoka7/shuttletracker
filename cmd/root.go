@@ -47,7 +47,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		// Notification service
-		var ns shuttletracker.NotificationService = np ///from here///
+		var ns shuttletracker.NotificationService = np 
 
 		// Model service
 		var ms shuttletracker.ModelService = pg

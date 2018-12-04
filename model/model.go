@@ -170,9 +170,10 @@ type Segment struct {
 }
 
 type Notification struct {
-	RouteID			string	`json:"route"			bson:"route,omitempty"`			// some stops are on more than one route
-	StopID			string 	`json:"stop"			bson:"stop,omitempty"`
-	PhoneNumber 	string	`json:"phone_number"	bson:"phone_number"`
-	Carrier 		string	`json:"carrier"			bson:"carrier"`
-	Sent 			bool	`json:"sent"			bson:"sent"`
+	RouteID  	*int64 		`json:"route_id"`
+	PhoneNumber	string 		`json:"phone_num"`
+	Carrier		string 		`json:"carrier"`
+	Verified	bool		`json:"verified"`
+	Time 		time.Time 	`json:"time"`
+	Stop		string		`json:"stop"`
 }

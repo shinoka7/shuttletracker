@@ -33,7 +33,7 @@ func GetEmail(phone_number string, input_carrier string) (string) {
 }
 
 //figure out the object to use for shuttle data storage
-func CreateMessage(shuttles []model.Vehicle, target_stop string) ([]byte) {
+func CreateMessage(shuttles []model.VehicleUpdate, target_stop string) ([]byte) {
 	var message_body string = "The next shuttles that will arrive at " + target_stop + "are\n"
 
 	var eta []time.Time = runETA(shuttles, target_stop)
@@ -48,29 +48,29 @@ func CreateMessage(shuttles []model.Vehicle, target_stop string) ([]byte) {
 }
 
 //return ETA based on current vehicles and target stop
-func runETA(vehicles []model.Vehicle, target_stop string) ([]time.Time) {
+//TODO: look to ETA branch
+func runETA(vehicles []model.VehicleUpdate, target_stop string) ([]time.Time) {
 	return nil
 }
 
-func Send(notifications []model.Notification, current_stop string, next_stop string) (int){
-
-	// Get recipient(s) email address, and create message
-	var to_emails []string 
+//TODO: add current time based functionality
+func Send(notifications []model.Notification, shuttles []model.VehicleUpdate) (int){
+	var to_emails []string
+	var to_msg []byte
 	for i := range notifications {
 		to_emails = append(to_emails, GetEmail(notifications[i].PhoneNumber, notifications[i].Carrier))
+		to_msg = append(to_msg, CreateMessage(shuttles, notifications[i].Stop))
 	}
 
-	message := CreateMessage(current_stop, next_stop)
-
-	// Authenticate sender email
+	//Authenticate sender email
 	auth := smtp.PlainAuth("", "shuttletrackertest@gmail.com", "shuttletracker2017", "smtp.gmail.com")
-	
-	// Connect to the server, authenticate, set the sender and recipient, and send
+
+	//Connect to the server, authenticate, set the sender and recipient, and send
 	var sent int = 0
 	for i := range to_emails {
 		var to = []string{to_emails[i]}
-		err := smtp.SendMail("smtp.gmail.com:587", auth, "shuttletrackertest@gmail.com", to, message)
-		
+		err := smtp.SendMail("smtp.gmail.com:587", auth, "shuttletrackertest@gmail.com", to, to_msg[i])
+
 		if err != nil {
 			log.Debugf("Message send error: %v", err)
 		} else {
@@ -79,5 +79,4 @@ func Send(notifications []model.Notification, current_stop string, next_stop str
 		}
 	}
 	return sent
-	
 }
