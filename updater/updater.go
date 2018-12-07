@@ -42,10 +42,11 @@ type Config struct {
 }
 
 // New creates an Updater.
-func New(cfg Config, ms shuttletracker.ModelService) (*Updater, error) {
+func New(cfg Config, ms shuttletracker.ModelService, ns shuttletracker.NotificationService) (*Updater, error) {
 	updater := &Updater{
 		cfg:   cfg,
 		ms:    ms,
+		ns:	   ns,
 		mutex: &sync.Mutex{},
 	}
 
@@ -82,16 +83,18 @@ func (u *Updater) Run() {
 	u.update()
 
 	// notifications
-	/* go func () {
+	go func () {
 		for range time.Tick(10 * time.Minute){
 			send_notifications.Send()
 		}
-	}()*/
+	}()
 
 	// Call update() every updateInterval.
-	for range ticker {
-		u.update()
-	}
+	go func () {
+		for range ticker {
+			u.update()
+		}
+	}()
 }
 
 // Send a request to iTrak API, get updated shuttle info,

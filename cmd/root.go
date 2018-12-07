@@ -59,7 +59,7 @@ var rootCmd = &cobra.Command{
 		var us shuttletracker.UserService = pg
 
 		// Make shuttle position updater -- add notipost updating
-		updater, err := updater.New(*cfg.Updater, ms)
+		updater, err := updater.New(*cfg.Updater, ms, ns)
 		if err != nil {
 			log.WithError(err).Error("Could not create updater.")
 			return
