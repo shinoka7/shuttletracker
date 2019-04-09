@@ -5,6 +5,7 @@ import about from './components/about.vue';
 import schedules from '@/components/schedules.vue';
 import settings from '@/components/settings.vue';
 import register from './components/register.vue';
+import eta from '@/components/eta.vue';
 
 Vue.use(Router);
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: about,
+    },
+    {
+      path: '/eta',
+      name: 'eta',
+      component: eta,
     },
     {
       path: '/schedules',
