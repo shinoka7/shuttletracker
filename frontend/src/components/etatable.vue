@@ -8,9 +8,8 @@
 </template>
 
 <script lang="ts">
-
 import timetable from './timetable.vue'
-import Vue from 'vue';
+import Vue from 'vue'
 import EventBus from '../event_bus'
 export default Vue.extend({
 	components: {
@@ -25,9 +24,7 @@ export default Vue.extend({
 			stop: url[1].split('=')[1],
 		}
 	},
-
 });
-
 </script>
 
 <style lang="scss">

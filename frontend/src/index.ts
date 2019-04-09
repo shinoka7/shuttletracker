@@ -23,9 +23,9 @@ export default new Router({
       component: about,
     },
     {
-      path: '/eta',
-      name: 'eta',
-      component: eta,
+      path: '/etatable',
+      name: 'etatable',
+      component: etatable,
     },
     {
       path: '/schedules',

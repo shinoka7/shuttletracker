@@ -207,7 +207,7 @@ export default Vue.extend({
           icon: StopIcon,
         });
         if (this.Map !== undefined) {
-          let stop_link = ('/register').concat('?stop_id=').concat(stop.id.toString()).concat('&stop_name=').concat(stop.name);
+          let stop_link = ('/etatable').concat('?stop_id=').concat(stop.id.toString()).concat('&stop_name=').concat(stop.name);
           if ( stop.routesOn.length == 1 ) {
             stop_link = stop_link.concat('&route=').concat(stop.routesOn[0].id.toString());
           } else {
